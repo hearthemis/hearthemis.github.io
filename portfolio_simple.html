@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio</title>
+    
+    <style>
+        /* --- VARIABLES CSS (Facile pour changer les couleurs de tout le site d'un coup) --- */
+        :root {
+            --primary-color: #2563eb; /* Bleu foncé */
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc; /* Gris très clair pour le fond */
+            --text-main: #0f172a; /* Texte presque noir */
+            --text-muted: #475569; /* Texte gris */
+            --white: #ffffff;
+            --border-radius: 8px;
+        }
+
+        /* --- RÉINITIALISATION DE BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            /* Permet un défilement fluide quand on clique sur un lien du menu */
+            scroll-behavior: smooth; 
+        }
+
+        body {
+            /* Utilisation d'une police système moderne et propre */
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- EN-TÊTE ET NAVIGATION --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: fixed; /* Garde le menu toujours en haut */
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- STRUCTURE PRINCIPALE --- */
+        /* Espace en haut pour ne pas être caché par le menu fixe */
+        main {
+            padding-top: 80px; 
+        }
+
+        section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--text-main);
+        }
+
+        /* --- SECTION HERO (Accueil) --- */
+        #hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            min-height: 70vh;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .hero-image img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%; /* Rend l'image ronde */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* --- SECTION À PROPOS --- */
+        #about {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            padding: 4rem;
+        }
+
+        .about-content {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* --- SECTION PROJETS --- */
+        .projects-grid {
+            display: grid;
+            /* Crée des colonnes qui s'adaptent automatiquement à la taille de l'écran */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .project-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- SECTION CONTACT & FOOTER --- */
+        #contact {
+            text-align: center;
+        }
+
+        #contact p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--text-main);
+            color: var(--white);
+            margin-top: 4rem;
+        }
+
+        /* --- DESIGN RESPONSIVE (Pour les téléphones) --- */
+        @media (max-width: 768px) {
+            #hero {
+                flex-direction: column-reverse; /* Met le texte en bas, image en haut sur mobile */
+                text-align: center;
+                gap: 2rem;
+                padding-top: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none; /* Cache le menu sur mobile pour faire simple */
+            }
+
+            .logo {
+                margin: 0 auto;
+            }
+
+            #about {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <!-- Remplace "MonPortfolio" par ton nom ou logo -->
+            <a href="#" class="logo">MonPortfolio.</a>
+            <ul class="nav-links">
+                <li><a href="#hero">Accueil</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#projects">Projets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- SECTION ACCUEIL -->
+        <section id="hero">
+            <div class="hero-text">
+                <!-- Modifie ton nom ici -->
+                <h1>Bonjour, je suis <br><span>Ton Prénom</span></h1>
+                <!-- Modifie ta description ici -->
+                <p>Je suis un(e) développeur(se) web passionné(e) par la création de sites internet modernes, beaux et accessibles.</p>
+                <a href="#contact" class="btn">Me contacter</a>
+            </div>
+            <div class="hero-image">
+                <!-- Remplace l'URL de l'image (src="") par un lien vers ta propre photo -->
+                <!-- Pour l'instant, c'est une image grise par défaut (placeholder) -->
+                <img src="https://placehold.co/400x400/e2e8f0/1e293b?text=Ma+Photo" alt="Photo de profil">
+            </div>
+        </section>
+
+        <!-- SECTION À PROPOS -->
+        <section id="about">
+            <h2>À propos de moi</h2>
+            <div class="about-content">
+                <!-- Modifie ton texte de présentation ici -->
+                <p>
+                    Bienvenue sur mon portfolio ! J'aime apprendre de nouvelles technologies et relever des défis. 
+                    Actuellement, je me perfectionne en HTML, CSS et JavaScript. Quand je ne code pas, j'aime lire, 
+                    voyager et découvrir de nouvelles choses. Ce site est mon tout premier projet mis en ligne via GitHub Pages !
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION PROJETS -->
+        <section id="projects">
+            <h2>Mes Projets</h2>
+            <div class="projects-grid">
+                
+                <!-- PROJET 1 -->
+                <div class="project-card">
+                    <!-- Image du projet -->
+                    <img src="https://placehold.co/600x400/e2e8f0/1e293b?text=Projet+1" alt="Aperçu projet 1" class="project-img">
+                    <div class="project-info">
+                        <h3>Site Vitrine</h3>
+                        <p>Un site internet créé pour une petite entreprise locale utilisant HTML et CSS.</p>
+                        <!-- Lien vers ton projet (remplace le # par l'URL) -->
+                        <a href="#" class="project-link">Voir le projet &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- PROJET 2 -->
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/e2e8f0/1e293b?text=Projet+2" alt="Aperçu projet 2" class="project-img">
+                    <div class="project-info">
+                        <h3>Jeu en JavaScript</h3>
+                        <p>Un petit jeu de devinette de nombres codé entièrement en JavaScript pour m'entraîner à la logique.</p>
+                        <a href="#" class="project-link">Voir le projet &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- PROJET 3 -->
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/e2e8f0/1e293b?text=Projet+3" alt="Aperçu projet 3" class="project-img">
+                    <div class="project-info">
+                        <h3>Mon CV en ligne</h3>
+                        <p>La transformation de mon CV papier en une version web interactive et responsive.</p>
+                        <a href="#" class="project-link">Voir le projet &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION CONTACT -->
+        <section id="contact">
+            <h2>Travaillons ensemble !</h2>
+            <!-- Modifie le texte d'invitation -->
+            <p>Je suis actuellement à la recherche de nouvelles opportunités. N'hésitez pas à m'envoyer un message !</p>
+            <!-- Remplace "ton.email@exemple.com" par ta vraie adresse email -->
+            <a href="mailto:ton.email@exemple.com" class="btn">M'envoyer un email</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Ton Prénom Ton Nom. Créé avec ❤️ sans Ruby ni Jekyll !</p>
+    </footer>
+
+</body>
+</html>
